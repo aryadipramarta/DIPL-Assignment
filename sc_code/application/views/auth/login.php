@@ -37,7 +37,7 @@
                         <center><button type="submit" class="btn btn-block btn-primary" style="width: 200px;">Login</button></center>
                         <br>
                         <center>Forget Password? <a href="">Click Here</a></center>
-                        <center><a href="<?= base_url('auth/registration'); ?>">Create an Account!</a></center>
+                        <center><a href="<?= base_url('pembeli/registration'); ?>">Create an Account!</a></center>
                     </form>
                 </center>
                 <br>

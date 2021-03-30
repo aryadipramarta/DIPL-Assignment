@@ -57,7 +57,7 @@
                         <br>
                         <center><button type="submit" class="btn btn-block btn-primary" style="width: 200px;">Register</button></center>
                         <br>
-                        <center>Already have an account? <a href="<?= base_url('auth'); ?>">Login</a></center>
+                        <center>Already have an account? <a href="<?= base_url('pembeli'); ?>">Login</a></center>
                     </form>
                 </center>
                 <br>
