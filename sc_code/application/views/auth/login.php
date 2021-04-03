@@ -2,48 +2,56 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <title><?= $title; ?></title>
+    <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="<?= base_url('assets/plugins/bootstrap/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/css/main_login.css') ?> ">
+    <link rel="stylesheet" href="<?= base_url('assets/css/util_login.css') ?> ">
 </head>
 
 <body>
-    <center>
-        <br>
-        <div class="d-inline-flex p-2 bd-highlight" style="text-align: left;">
-            <span class="border border-primary rounded" style="width: 500px;">
-                <br><br>
-                <center>
-                    <form class="user" method="post" action="<?= base_url('auth'); ?>">
-                        <center>
-                            <h2 style="color:#0d6efd;">Login</h2>
-                        </center><br>
-                        <?= $this->session->flashdata('message'); ?>
-                        <br>
-                        <div class="form-row" style="width:400px;">
-                            <div class="col">
-                                <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Username">
-                            </div>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-form-title" style="background-image: url(<?= base_url('assets/image/bg-02.jpg') ?> )">
+                    <span class="login100-form-title-1"> Sign In </span>
+                </div>
+
+                <form class="login100-form validate-form" method="post" action="<?= base_url('auth'); ?>">
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                        <span class="label-input100">Username</span>
+                        <input class="input100" type="text" name="username" id="username" placeholder="Enter username" />
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                        <span class="label-input100">Password</span>
+                        <input class="input100" type="password" name="password" id="password" placeholder="Enter password" />
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="flex-sb-m w-full p-b-30">
+                        <div>
+                            <a href="#" class="txt1">Forget Password ?</a>
                         </div>
-                        <br>
-                        <div class="form-row" style="width:400px;">
-                            <div class="col">
-                                <input type="password" name="password" class="form-control" id="exampleInputEmail1" placeholder="Password">
-                            </div>
+
+                        <div>
+                            <a href="<?= base_url('pembeli/registration') ?>" class="txt1"> Create an Account !</a>
                         </div>
-                        <br>
-                        <center><button type="submit" class="btn btn-block btn-primary" style="width: 200px;">Login</button></center>
-                        <br>
-                        <center>Forget Password? <a href="">Click Here</a></center>
-                        <center><a href="<?= base_url('pembeli/registration'); ?>">Create an Account!</a></center>
-                    </form>
-                </center>
-                <br>
-            </span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">Login</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </center>
+    </div>
+
+    <script src="js/main.js"></script>
 </body>
 
 </html>

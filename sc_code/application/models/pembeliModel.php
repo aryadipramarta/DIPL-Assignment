@@ -37,11 +37,11 @@ class pembelimodel extends CI_Model
                 ];
                 $this->session->set_userdata($user);
                 if ($user['role_id'] == 1) {
-                    echo ('login sebagai pembeli');
+                    redirect('pembeli');
                 } else if ($user['role_id'] == 2) {
-                    echo ('login sebagai pegawai');
-                } else {
-                    echo ('login sebagai pemilik');
+                    redirect('pegawai');
+                } else if ($user['role_id'] == 3) {
+                    redirect('pemilik');
                 }
             } else {
                 return false;

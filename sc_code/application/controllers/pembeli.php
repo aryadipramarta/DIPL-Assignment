@@ -11,23 +11,10 @@ class Pembeli extends CI_Controller
     }
     public function index()
     {
-        $this->form_validation->set_rules('username', 'Username', 'required|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Login Pembeli';
-            $this->load->view('auth/login', $data);
-        } else {
-            $data['username_pembeli'] = $this->input->post('username');
-            $data['password_pembeli'] = $this->input->post('password');
-            $result = $this->pembeliModel->login($data);
-            if (!$result) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password or Username is wrong!</div>');
-                $data['title'] = 'Login Pembeli';
-                $this->load->view('auth/login', $data);
-            } else {
-                echo ('berhasil login');
-            }
-        }
+        $data['title'] = 'Homepage Pembeli - Nusantara Phone Store';
+        $this->load->view('template/header', $data);
+        $this->load->view('view_pembeli/homepage');
+        $this->load->view('template/footer');
     }
     public function registration()
     {
@@ -42,7 +29,17 @@ class Pembeli extends CI_Controller
         } else {
             $this->pembeliModel->createPembeli();
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun berhasil dibuat</div>');
-            redirect('pembeli');
+            redirect('auth');
         }
+    }
+    public function logout()
+    {
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('role_id');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been Logout!</div>');
+        $data['title'] = 'Nusantara Phone Store';
+        $this->load->view('template/header', $data);
+        $this->load->view('landing_page/homepage');
+        $this->load->view('template/footer');
     }
 }
