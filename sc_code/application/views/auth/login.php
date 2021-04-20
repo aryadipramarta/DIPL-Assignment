@@ -18,18 +18,21 @@
             <div class="wrap-login100">
                 <div class="login100-form-title" style="background-image: url(<?= base_url('assets/image/bg-02.jpg') ?> )">
                     <span class="login100-form-title-1"> Sign In </span>
+                    <?= $this->session->flashdata('message'); ?>
                 </div>
 
                 <form class="login100-form validate-form" method="post" action="<?= base_url('auth'); ?>">
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
                         <span class="label-input100">Username</span>
                         <input class="input100" type="text" name="username" id="username" placeholder="Enter username" />
+                        <small class="text-danger"><?= form_error('username'); ?></small>
                         <span class="focus-input100"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
                         <span class="label-input100">Password</span>
                         <input class="input100" type="password" name="password" id="password" placeholder="Enter password" />
+                        <small class="text-danger"><?= form_error('password'); ?></small>
                         <span class="focus-input100"></span>
                     </div>
 

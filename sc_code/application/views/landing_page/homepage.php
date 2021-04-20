@@ -47,7 +47,7 @@
                                 <li><a href="products.html">VIVO</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="<?= base_url('homepage/contact'); ?>">Contact</a></li>
                         <li><a href="<?= base_url('homepage/aboutus'); ?>">About Us</a></li>
                     </ul>
                 </div>

@@ -21,4 +21,11 @@ class Homepage extends CI_Controller
         $this->load->view('landing_page/aboutus');
         $this->load->view('template/footer');
     }
+    public function contact()
+    {
+        $data['title'] = 'Contact - Nusantara Phone Store';
+        $this->load->view('template/header', $data);
+        $this->load->view('landing_page/contact');
+        $this->load->view('template/footer');
+    }
 }

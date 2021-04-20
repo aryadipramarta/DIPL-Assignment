@@ -7,7 +7,7 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('pembeliModel');
+        $this->load->model('UserModel');
     }
     public function index()
     {
@@ -19,7 +19,7 @@ class Auth extends CI_Controller
         } else {
             $data['username_pembeli'] = $this->input->post('username');
             $data['password_pembeli'] = $this->input->post('password');
-            $result = $this->pembeliModel->login($data);
+            $result = $this->UserModel->login($data);
             if (!$result) {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password or Username is wrong!</div>');
                 $data['title'] = 'Login Pembeli';

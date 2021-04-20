@@ -37,7 +37,7 @@
                 <!-- Navbar Links -->
                 <div id="navbar" class="navbar-collapse collapse text-center">
                     <ul class="nav navbar-nav">
-                        <li><a href="homepage-user.html">Home</a></li>
+                        <li><a href="<?= base_url('homepage'); ?>">Home</a></li>
                         <li class="dropdown dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="tf-ion-ios-arrow-down"></span></a>
                             <ul class="dropdown-menu">
@@ -48,8 +48,8 @@
                                 <li><a href="products.html">VIVO</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="<?= base_url('homepage/contact'); ?>">Contact</a></li>
+                        <li><a href="<?= base_url('homepage/aboutus'); ?>">About Us</a></li>
                     </ul>
                 </div>
             </div>

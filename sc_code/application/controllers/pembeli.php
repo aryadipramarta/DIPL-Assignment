@@ -7,7 +7,7 @@ class Pembeli extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('pembeliModel');
+        $this->load->model('UserModel');
     }
     public function index()
     {
@@ -27,7 +27,7 @@ class Pembeli extends CI_Controller
             $data['title'] = 'Member Registration';
             $this->load->view('auth/register', $data);
         } else {
-            $this->pembeliModel->createPembeli();
+            $this->UserModel->createPembeli();
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun berhasil dibuat</div>');
             redirect('auth');
         }
