@@ -13,7 +13,7 @@ class Barang_model extends CI_Model
 
     public function TampilkanSemuaBarang()
     {
-        return $this->db->get($this->_table)->result();
+        return $this->db->get('tb_barang');
     }
 
     public function SearchBarang($id)

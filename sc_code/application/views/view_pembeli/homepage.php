@@ -105,127 +105,27 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
     <section class="products section bg-gray">
         <div class="container">
             <div class="row">
                 <div class="title text-center">
-                    <h2>Trendy Products</h2>
+                    <h2>Our Product</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="product-item">
-                        <div class="product-thumb">
-                            <span class="bage">Sale</span>
-                            <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                        </div>
-                        <div class="product-content">
-                            <h4><a href="#">Merek HP</a></h4>
-                            <p>Harga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="product-item">
-                        <div class="product-thumb">
-                            <span class="bage">Sale</span>
-                            <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                        </div>
-                        <div class="product-content">
-                            <h4><a href="#">Merek HP</a></h4>
-                            <p>Harga</p>
+                <?php foreach ($barang as $brg) : ?>
+                    <div class="col-md-4">
+                        <div class="product-item">
+                            <div class="product-thumb">
+                                <span class="bage">Sale</span>
+                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
+                            </div>
+                            <div class="product-content">
+                                <h4><a href="#"><?php echo $brg->merk ?></a></h4>
+                                <p><?php echo $brg->harga ?></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="product-item">
-                        <div class="product-thumb">
-                            <span class="bage">Sale</span>
-                            <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                        </div>
-                        <div class="product-content">
-                            <h4><a href="#">Merek HP</a></h4>
-                            <p>Harga</p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <div class="product-item">
-                        <div class="product-thumb">
-                            <span class="bage">Sale</span>
-                            <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                        </div>
-                        <div class="product-content">
-                            <h4><a href="#">Merek HP</a></h4>
-                            <p>Harga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="product-item">
-                        <div class="product-thumb">
-                            <span class="bage">Sale</span>
-                            <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                        </div>
-                        <div class="product-content">
-                            <h4><a href="#">Merek HP</a></h4>
-                            <p>Harga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="product-item">
-                        <div class="product-thumb">
-                            <span class="bage">Sale</span>
-                            <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                        </div>
-                        <div class="product-content">
-                            <h4><a href="#">Merek HP</a></h4>
-                            <p>Harga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <div class="product-item">
-                        <div class="product-thumb">
-                            <span class="bage">Sale</span>
-                            <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                        </div>
-                        <div class="product-content">
-                            <h4><a href="#">Merek HP</a></h4>
-                            <p>Harga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="product-item">
-                        <div class="product-thumb">
-                            <span class="bage">Sale</span>
-                            <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                        </div>
-                        <div class="product-content">
-                            <h4><a href="#">Merek HP</a></h4>
-                            <p>Harga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="product-item">
-                        <div class="product-thumb">
-                            <span class="bage">Sale</span>
-                            <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                        </div>
-                        <div class="product-content">
-                            <h4><a href="#">Merek HP</a></h4>
-                            <p>Harga</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>

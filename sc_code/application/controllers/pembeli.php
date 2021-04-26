@@ -12,8 +12,10 @@ class Pembeli extends CI_Controller
     public function index()
     {
         $data['title'] = 'Homepage Pembeli - Nusantara Phone Store';
+        $this->load->model('BarangModel');
+        $data['barang'] = $this->BarangModel->TampilkanSemuaBarang()->result();
         $this->load->view('template/header', $data);
-        $this->load->view('view_pembeli/homepage');
+        $this->load->view('view_pembeli/homepage', $data);
         $this->load->view('template/footer');
     }
     public function registration()
@@ -40,6 +42,18 @@ class Pembeli extends CI_Controller
         $data['title'] = 'Nusantara Phone Store';
         $this->load->view('template/header', $data);
         $this->load->view('landing_page/homepage');
+        $this->load->view('template/footer');
+    }
+    public function cart()
+    {
+        $session = $this->session->userdata('username');
+        $user = $this->session->userdata('id_user');
+        $this->load->model('authModel');
+        $this->load->model('BarangModel');
+        $data['user'] = $this->authModel->get_profile($session);
+        $data['order'] = $this->BarangModel->getviewcart($user);
+        $this->load->view('template/header', $data);
+        $this->load->view('view_pembeli/cart', $data);
         $this->load->view('template/footer');
     }
 }
