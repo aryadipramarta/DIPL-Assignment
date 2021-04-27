@@ -1,7 +1,11 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Barang_model extends CI_Model
+class BarangModel extends CI_Model
 {
+    function __construct()
+    {
+        $this->Table = 'tb_barang';
+    }
     private $_table = "tb_barang";
 
     public $id_barang;
@@ -14,6 +18,12 @@ class Barang_model extends CI_Model
     public function TampilkanSemuaBarang()
     {
         return $this->db->get('tb_barang');
+    }
+
+    public function detail_data($id = NULL)
+    {
+        $query = $this->db->get_where('tb_barang', array('id_barang' => $id))->row();
+        return $query;
     }
 
     public function SearchBarang($id)
@@ -48,5 +58,22 @@ class Barang_model extends CI_Model
     public function deleteBarang($id)
     {
         return $this->db->delete($this->_table, array("id_barang" => $id));
+    }
+    public function getRows($id = '')
+    {
+        $this->db->select('*');
+        $this->db->from($this->Table);
+        if ($id) {
+            $this->db->where('id_barang', $id);
+            $query = $this->db->get();
+            $result = $query->row_array();
+        } else {
+            $this->db->order_by('merk', 'asc');
+            $query = $this->db->get();
+            $result = $query->result_array();
+        }
+
+        // Return fetched data
+        return !empty($result) ? $result : false;
     }
 }

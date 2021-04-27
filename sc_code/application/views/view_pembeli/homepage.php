@@ -24,15 +24,15 @@
                             <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
                         </li>
                         <li>
-                            <a href="#!"><img src="<?= base_url('assets/image/cart.png') ?>" height="20px"></a>
+                            <a href="<?= base_url('cart') ?>"><img src="<?= base_url('assets/image/cart.png') ?>" height="20px"></a>
                         </li>
                         <li class="dropdown dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">
                                 <img src="<?= base_url('assets/image/user.png') ?>" height="20px"><span class="tf-ion-ios-arrow-down">
                                 </span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">My Profile</a></li>
-                                <li><a href="#">My Order</a></li>
+                                <li><a href="<?= base_url('pembeli/profile'); ?>">My Profile</a></li>
+                                <li><a href="<?= base_url('pembeli/order'); ?>">My Order</a></li>
                                 <li><a href="<?= base_url('pembeli/logout') ?>">Logout</a></li>
                             </ul>
                         </li>
@@ -118,11 +118,12 @@
                         <div class="product-item">
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
+                                <img class="img-responsive" src="<?php echo base_url() . 'assets/image/' . $brg->img_barang ?>" alt="product-img" />
                             </div>
                             <div class="product-content">
-                                <h4><a href="#"><?php echo $brg->merk ?></a></h4>
-                                <p><?php echo $brg->harga ?></p>
+                                <h4><a href=""><?php echo $brg->merk ?></a></h4>
+                                <p>Rp. <?php echo $brg->harga ?></p>
+                                <?php echo anchor('barang/spesifikasi/' . $brg->id_barang, '<span class="badge badge-success">View Spesifikasi Barang</span>') ?>
                             </div>
                         </div>
                     </div>
