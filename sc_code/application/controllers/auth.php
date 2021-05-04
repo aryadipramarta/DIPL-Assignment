@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
+# Fungsi buat pemanggilan library dan model
 {
     public function __construct()
     {
@@ -9,6 +10,8 @@ class Auth extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('UserModel');
     }
+
+# Fungsi buat memasukkan username dan password serta validasi
     public function index()
     {
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
