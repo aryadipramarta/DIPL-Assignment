@@ -18,6 +18,7 @@ class Pembeli extends CI_Controller
         $this->load->view('view_pembeli/homepage', $data);
         $this->load->view('template/footer');
     }
+
     public function registration()
     {
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
@@ -31,7 +32,7 @@ class Pembeli extends CI_Controller
         } else {
             $this->UserModel->createPembeli();
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun berhasil dibuat</div>');
-            redirect('auth');
+            redirect('authpembeli');
         }
     }
     public function logout()

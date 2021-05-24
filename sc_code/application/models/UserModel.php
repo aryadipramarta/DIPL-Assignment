@@ -1,15 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
-
+//Class UserModel untuk melakukan koneksi ataupun aktifitas database user dengan user 
 class UserModel extends CI_Model
 {
-    public $username_pembeli;
-    public $nama_pembeli;
-    public $password_pembeli;
-    public $noHp_pembeli;
-    public $email_pembeli;
-    public $role_id;
-
-
+    #Fungsi untuk create akun pembeli yang nantinya data akan disimpan pada tb_pembeli dan fungsi ini digunakan saat akan melakukan registrasi
     public function createPembeli()
     {
         $post = $this->input->post();
@@ -22,7 +15,8 @@ class UserModel extends CI_Model
         $this->db->insert('tb_pembeli', $this);
     }
 
-    public function login($data)
+    //Fungsi ini untuk melakukan cek data login dengan data yang ada pada database dan melakukan validasinya serta jika berhasil akan redirect menuju role nya masing masing
+    public function login_pembeli($data)
     {
         $result = $this->db->get_where('tb_pembeli', ['username_pembeli' => $data['username_pembeli']])->row_array();
         if ($result) {
@@ -36,13 +30,49 @@ class UserModel extends CI_Model
                     'role_id' => $result['role_id']
                 ];
                 $this->session->set_userdata($user);
-                if ($user['role_id'] == 1) {
-                    redirect('pembeli');
-                } else if ($user['role_id'] == 2) {
-                    redirect('pegawai');
-                } else if ($user['role_id'] == 3) {
-                    redirect('pemilik');
-                }
+                redirect('pembeli');
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function login_pemilik($data)
+    {
+        $result = $this->db->get_where('tb_pemilik', ['username_pemilik' => $data['username_pemilik']])->row_array();
+        if ($result) {
+            if ($data['password_pemilik'] = $result['password_pemilik']) {
+                $user = [
+                    'id_pemilik' => $result['id_pemilik'],
+                    'username_pemilik' => $result['username_pemilik'],
+                    'nama_pemilik' => $result['nama_pemilik'],
+                    'role_id' => $result['role_id']
+                ];
+                $this->session->set_userdata($user);
+                redirect('pemilik');
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    public function login_pegawai($data)
+    {
+        $result = $this->db->get_where('tb_pegawai', ['username_pegawai' => $data['username_pegawai']])->row_array();
+        if ($result) {
+            if ($data['password_pegawai'] = $result['password_pegawai']) {
+                $user = [
+                    'id_pegawai' => $result['id_pegawai'],
+                    'username_pegawai' => $result['username_pegawai'],
+                    'nama_pegawai' => $result['nama_pegawai'],
+                    'noHP_pegawai' => $result['noHp_pegawai'],
+                    'role_id' => $result['role_id']
+                ];
+                $this->session->set_userdata($user);
+                redirect('pegawai');
             } else {
                 return false;
             }

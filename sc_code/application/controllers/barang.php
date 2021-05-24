@@ -21,6 +21,7 @@ class Barang extends CI_Controller
         $this->load->view('template/spesifikasi_barang', $data, $product);
         $this->load->view('template/footer');
     }
+    #Memasukkan Barang ke dalam cart dengan parameter id barang sebagai inputan
     public function addToCart($id)
     {
         $barang = $this->BarangModel->getRows($id);

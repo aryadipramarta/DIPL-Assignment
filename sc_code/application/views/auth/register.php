@@ -64,7 +64,7 @@
                     <?= form_error('password', '<small class="text-danger">', '</small>'); ?>
                 </div>
                 <label>
-                    <center>Already have an account? <a href="<?= base_url('auth'); ?>">Login</a></center>
+                    <center>Already have an account? <a href="<?= base_url('authpembeli'); ?>">Login</a></center>
                 </label>
                 <button>Register Now</button>
             </form>

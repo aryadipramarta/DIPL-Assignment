@@ -2,7 +2,6 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Pemilik extends CI_Controller
-# Fungsi buat pemanggilan library dan model
 {
     public function __construct()
     {
@@ -10,8 +9,6 @@ class Pemilik extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('UserModel');
     }
-
-// Fungsi buat memasukkan username dan password serta validasi
     public function login()
     {
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
@@ -32,8 +29,6 @@ class Pemilik extends CI_Controller
             }
         }
     }
-
-// Fungsi buat melihat laporan serta cek laporan ditemukan apa tidak
     public function view_laporan()
     {
         $this->form_validation->set_rules('kodelaporan', 'KodeLaporan', 'required|trim');

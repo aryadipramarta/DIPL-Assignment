@@ -10,6 +10,8 @@ class Homepage extends CI_Controller
     public function index()
     {
         $data['title'] = 'Nusantara Phone Store';
+        $this->load->model('BarangModel');
+        $data['barang'] = $this->BarangModel->TampilkanSemuaBarang()->result();
         $this->load->view('template/header', $data);
         $this->load->view('landing_page/homepage');
         $this->load->view('template/footer');

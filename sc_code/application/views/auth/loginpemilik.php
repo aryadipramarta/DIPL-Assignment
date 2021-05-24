@@ -17,11 +17,11 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <div class="login100-form-title" style="background-image: url(<?= base_url('assets/image/bg-02.jpg') ?> )">
-                    <span class="login100-form-title-1"> Sign In </span>
+                    <span class="login100-form-title-1"> LOGIN - PEMILIK </span>
                     <?= $this->session->flashdata('message'); ?>
                 </div>
 
-                <form class="login100-form validate-form" method="post" action="<?= base_url('authpembeli'); ?>">
+                <form class="login100-form validate-form" method="post" action="<?= base_url('authpemilik'); ?>">
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
                         <span class="label-input100">Username</span>
                         <input class="input100" type="text" name="username" id="username" placeholder="Enter username" />
@@ -35,17 +35,6 @@
                         <small class="text-danger"><?= form_error('password'); ?></small>
                         <span class="focus-input100"></span>
                     </div>
-
-                    <div class="flex-sb-m w-full p-b-30">
-                        <div>
-                            <a href="#" class="txt1">Forget Password ?</a>
-                        </div>
-
-                        <div>
-                            <a href="<?= base_url('pembeli/registration') ?>" class="txt1"> Create an Account !</a>
-                        </div>
-                    </div>
-
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">Login</button>
                     </div>

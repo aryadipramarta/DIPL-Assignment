@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
-
+//Membuat Class BarangModel untuk melakukan koneksi antara Database tb_barang dengan Controller 
 class BarangModel extends CI_Model
 {
     function __construct()
@@ -15,22 +15,26 @@ class BarangModel extends CI_Model
     public $harga;
     public $description;
 
+    //Fungsi untuk menampilkan semua barang yang ada pada tb_barang
     public function TampilkanSemuaBarang()
     {
         return $this->db->get('tb_barang');
     }
 
+    //Fungsi menampilkan detail spesifik dari barang yang dicari sesuai dengan id barang
     public function detail_data($id = NULL)
     {
         $query = $this->db->get_where('tb_barang', array('id_barang' => $id))->row();
         return $query;
     }
 
+    //Fungsi mencari barang apakah ada pada tb_barang dengan menerima masukan id barang
     public function SearchBarang($id)
     {
         return $this->db->get_where($this->_table, ["id_barang" => $id])->row();
     }
 
+    //Fungsi melakukan input barang pada tb_barang 
     public function InputBarang()
     {
         $post = $this->input->post();
@@ -42,7 +46,7 @@ class BarangModel extends CI_Model
         $this->description = $post["description"];
         return $this->db->insert($this->_table, $this);
     }
-
+    //Fungsi update barang yang dilakukan terhdap database tb_barang
     public function UpdateBarang()
     {
         $post = $this->input->post();
@@ -54,11 +58,12 @@ class BarangModel extends CI_Model
         $this->description = $post["description"];
         return $this->db->update($this->_table, $this, array('product_id' => $post['id']));
     }
-
+    //Fungsi delete barang terhadap barang yang ada pada database tb_barang
     public function deleteBarang($id)
     {
         return $this->db->delete($this->_table, array("id_barang" => $id));
     }
+    //Fungsi untuk mendapatkan data barang lalu menampilkan nya per row_array
     public function getRows($id = '')
     {
         $this->db->select('*');

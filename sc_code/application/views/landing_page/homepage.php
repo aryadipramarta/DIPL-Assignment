@@ -22,7 +22,7 @@
                             <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
                         </li>
                         <li><a href="<?= base_url('pembeli/registration'); ?>" class="btn btn-dark btn-sm">Register</a></li>
-                        <li><a href="<?= base_url('auth'); ?>" class="btn btn-dark btn-sm">Login</a></li>
+                        <li><a href="<?= base_url('authpembeli'); ?>" class="btn btn-dark btn-sm">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -82,146 +82,28 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
-    <!-- Product Items -->
-    <section class="products section">
+    <section class="products section bg-gray">
         <div class="container">
             <div class="row">
                 <div class="title text-center">
-                    <h2>MERK HP</h2>
+                    <h2>Our Product</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <a href="detail-product.html">
+                <?php foreach ($barang as $brg) : ?>
+                    <div class="col-md-4">
                         <div class="product-item">
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
+                                <img class="img-responsive" src="<?php echo base_url() . 'assets/image/' . $brg->img_barang ?>" alt="product-img" />
                             </div>
                             <div class="product-content">
-                                <h4><a href="#">iPhone 11 Green</a></h4>
-                                <p>Rp 14.999.000</p>
+                                <h4><a href=""><?php echo $brg->merk ?></a></h4>
+                                <p>Rp. <?php echo $brg->harga ?></p>
+                                <?php echo anchor('barang/spesifikasi/' . $brg->id_barang, '<span class="badge badge-success">View Spesifikasi Barang</span>') ?>
                             </div>
                         </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="detail-product.html">
-                        <div class="product-item">
-                            <div class="product-thumb">
-                                <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                            </div>
-                            <div class="product-content">
-                                <h4><a href="#">iPhone 11 Green</a></h4>
-                                <p>Rp 14.999.000</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="detail-product.html">
-                        <div class="product-item">
-                            <div class="product-thumb">
-                                <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                            </div>
-                            <div class="product-content">
-                                <h4><a href="#">iPhone 11 Green</a></h4>
-                                <p>Rp 14.999.000</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <a href="detail-product.html">
-                        <div class="product-item">
-                            <div class="product-thumb">
-                                <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                            </div>
-                            <div class="product-content">
-                                <h4><a href="#">iPhone 11 Green</a></h4>
-                                <p>Rp 14.999.000</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="detail-product.html">
-                        <div class="product-item">
-                            <div class="product-thumb">
-                                <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                            </div>
-                            <div class="product-content">
-                                <h4><a href="#">iPhone 11 Green</a></h4>
-                                <p>Rp 14.999.000</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="detail-product.html">
-                        <div class="product-item">
-                            <div class="product-thumb">
-                                <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                            </div>
-                            <div class="product-content">
-                                <h4><a href="#">iPhone 11 Green</a></h4>
-                                <p>Rp 14.999.000</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <a href="detail-product.html">
-                        <div class="product-item">
-                            <div class="product-thumb">
-                                <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                            </div>
-                            <div class="product-content">
-                                <h4><a href="#">iPhone 11 Green</a></h4>
-                                <p>Rp 14.999.000</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="detail-product.html">
-                        <div class="product-item">
-                            <div class="product-thumb">
-                                <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                            </div>
-                            <div class="product-content">
-                                <h4><a href="#">iPhone 11 Green</a></h4>
-                                <p>Rp 14.999.000</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="detail-product.html">
-                        <div class="product-item">
-                            <div class="product-thumb">
-                                <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?= base_url('assets/image/mobile1.jpeg') ?>" alt="product-img" />
-                            </div>
-                            <div class="product-content">
-                                <h4><a href="#">iPhone 11 Green</a></h4>
-                                <p>Rp 14.999.000</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
     </section>
