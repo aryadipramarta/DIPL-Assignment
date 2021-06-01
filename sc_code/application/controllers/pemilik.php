@@ -9,25 +9,17 @@ class Pemilik extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('UserModel');
     }
-    public function login()
+    public function index()
     {
-        $this->form_validation->set_rules('username', 'Username', 'required|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Login';
-            $this->load->view('auth/login', $data);
-        } else {
-            $data['username_pemilik'] = $this->input->post('username');
-            $data['password_pemilik'] = $this->input->post('password');
-            $result = $this->UserModel->login($data);
-            if (!$result) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password or Username is wrong!</div>');
-                $data['title'] = 'Login';
-                $this->load->view('auth/login', $data);
-            } else {
-                echo ('berhasil login');
-            }
-        }
+        $data['title'] = 'Dashboard Pemilik - Nusantara Phone Store';
+        $this->load->model('BarangModel');
+        $session = $this->session->userdata('username_pemilik');
+        if (!isset($session)) redirect('auth');
+        $user = $this->UserModel->get_profile_pemilik($session);
+        $data['barang'] = $this->BarangModel->TampilkanSemuaBarang()->result();
+        $this->load->view('template/header', $data);
+        $this->load->view('view_pemilik/dashboard_pemilik', ['data' => $user]);
+        $this->load->view('template/footer');
     }
     public function view_laporan()
     {
@@ -43,6 +35,42 @@ class Pemilik extends CI_Controller
                 $data['title'] = 'Lihat Laporan';
                 $this->load->view('pemilik/laporan', $data);
             }
+        }
+    }
+    public function logout()
+    {
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('role_id');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been Logout!</div>');
+        redirect('homepage');
+    }
+    public function editProfile($id_user)
+    {
+        $data['title'] = 'Edit Profile Pemilik - Nusantara Phone Store';
+        $this->load->library('form_validation');
+        $this->load->model('UserModel');
+        $this->form_validation->set_rules('name', 'Name', 'required|trim');
+        $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        $data = [
+            'nama_pemilik' => htmlspecialchars($this->input->post('name', true)),
+            'username_pemilik' => htmlspecialchars($this->input->post('username', true)),
+        ];
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Edit Profile Pemilik - Nusantara Phone Store';
+            $session = $this->session->userdata('username_pemilik');
+            $user = $this->UserModel->get_profile_pemilik($session);
+            $this->load->view('template/header', $data);
+            $this->load->view('view_pemilik/editprofile_pemilik', ['data' => $user]);
+            $this->load->view('template/footer');
+        } else {
+            $this->UserModel->editUser_Pemilik($id_user, $data);
+            $result = $this->db->get_where('tb_pemilik', ['username_pemilik' => $data['username_pemilik']])->row_array();
+            $user = [
+                'nama_pemilik' => $result['nama_pemilik'],
+                'username_pemilik' => $result['username_pemilik']
+            ];
+            $this->session->set_userdata($user);
+            redirect('pemilik/editProfile/' . $id_user, 'refresh');
         }
     }
 }

@@ -80,4 +80,40 @@ class UserModel extends CI_Model
             return false;
         }
     }
+    public function get_profile_pembeli($profile)
+    {
+        $result = $this->db->get_where('tb_pembeli', ['username_pembeli' => $profile])->result_array();
+        if (!$result) return false;
+        return $result;
+    }
+    public function editUser_Pembeli($id_pembeli, $data)
+    {
+        $this->db->where('id_pembeli', $id_pembeli);
+        $result = $this->db->update('tb_pembeli', $data);
+        return $result;
+    }
+    public function get_profile_pegawai($profile)
+    {
+        $result = $this->db->get_where('tb_pegawai', ['username_pegawai' => $profile])->result_array();
+        if (!$result) return false;
+        return $result;
+    }
+    public function get_profile_pemilik($profile)
+    {
+        $result = $this->db->get_where('tb_pemilik', ['username_pemilik' => $profile])->result_array();
+        if (!$result) return false;
+        return $result;
+    }
+    public function editUser_Pegawai($id_pegawai, $data)
+    {
+        $this->db->where('id_pegawai', $id_pegawai);
+        $result = $this->db->update('tb_pegawai', $data);
+        return $result;
+    }
+    public function editUser_Pemilik($id_pemilik, $data)
+    {
+        $this->db->where('id_pemilik', $id_pemilik);
+        $result = $this->db->update('tb_pemilik', $data);
+        return $result;
+    }
 }

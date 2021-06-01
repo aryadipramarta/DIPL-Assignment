@@ -116,36 +116,36 @@
                 <div class="col">
                     <div class="team-member text-center">
                         <img class="img-circle" src="<?= base_url('assets/image/impostor.png') ?>" height="100px">
-                        <h4>Jonathon Andrew</h4>
+                        <h4>Daffa Ullaya</h4>
                         <p>Founder</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="team-member text-center">
                         <img class="img-circle" src="<?= base_url('assets/image/impostor.png') ?>" height="100px">
-                        <h4>Adipisci Velit</h4>
+                        <h4>Aryadi Pramarta</h4>
                         <p>Developer</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="team-member text-center">
                         <img class="img-circle" src="<?= base_url('assets/image/impostor.png') ?>" height="100px">
-                        <h4>John Fexit</h4>
-                        <p>Shop Manager</p>
+                        <h4>Ajeung Angsaweni</h4>
+                        <p>Developer</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="team-member text-center">
                         <img class="img-circle" src="<?= base_url('assets/image/impostor.png') ?>" height="100px">
-                        <h4>John Fexit</h4>
-                        <p>Shop Manager</p>
+                        <h4>Delvanita</h4>
+                        <p>Developer</p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="team-member text-center">
                         <img class="img-circle" src="<?= base_url('assets/image/impostor.png') ?>" height="100px">
-                        <h4>John Fexit</h4>
-                        <p>Shop Manager</p>
+                        <h4>Rizal</h4>
+                        <p>Developer</p>
                     </div>
                 </div>
             </div>

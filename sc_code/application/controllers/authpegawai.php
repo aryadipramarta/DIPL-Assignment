@@ -11,6 +11,9 @@ class AuthPegawai extends CI_Controller
     }
     public function index()
     {
+        if ($this->session->userdata('username')) {
+            redirect('pegawai');
+        }
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
         if ($this->form_validation->run() == false) {

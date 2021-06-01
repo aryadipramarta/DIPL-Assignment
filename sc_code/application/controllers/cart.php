@@ -11,9 +11,11 @@ class Cart extends CI_Controller
     }
     function index()
     {
+        $id_user = $this->session->all_userdata()["id_pembeli"];
         $data = array();
+        $filteredCartItems = $this->BarangModel->getViewCart($id_user);
         $data['title'] = 'Cart - Nusantara Phone Store';
-        $data['cartItems'] = $this->cart->contents();
+        $data['cartItems'] = $filteredCartItems;
         $this->load->view('template/header', $data);
         $this->load->view('view_pembeli/cart', $data);
         $this->load->view('template/footer');

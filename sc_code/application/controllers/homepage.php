@@ -30,4 +30,9 @@ class Homepage extends CI_Controller
         $this->load->view('landing_page/contact');
         $this->load->view('template/footer');
     }
+    public function authlogin()
+    {
+        $data['title'] = 'Login System - Nusantara Phone Store';
+        $this->load->view('auth/loginoption', $data);
+    }
 }

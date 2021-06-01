@@ -24,9 +24,10 @@ class Barang extends CI_Controller
     #Memasukkan Barang ke dalam cart dengan parameter id barang sebagai inputan
     public function addToCart($id)
     {
+        $id_user = $this->session->all_userdata()["id_pembeli"];
         $barang = $this->BarangModel->getRows($id);
         $data = array(
-            'id' => $barang['id_barang'],
+            'id' => $barang['id_barang'] . "_" . $id_user,
             'name' => $barang['merk'],
             'qty' => 1,
             'price' => $barang['harga'],

@@ -66,19 +66,7 @@
                 <!-- Navbar Links -->
                 <div id="navbar" class="navbar-collapse collapse text-center">
                     <ul class="nav navbar-nav">
-                        <li><a href="homepage-user.html">Home</a></li>
-                        <li class="dropdown dropdown-slide">
-                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="tf-ion-ios-arrow-down"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="products.html">iPhone</a></li>
-                                <li><a href="products.html">Samsung</a></li>
-                                <li><a href="products.html">OPPO</a></li>
-                                <li><a href="products.html">Xiaomi</a></li>
-                                <li><a href="products.html">VIVO</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="<?= base_url('pembeli') ?>">Home</a></li>
                     </ul>
                 </div>
             </div>
@@ -105,7 +93,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if ($this->cart->total_items() > 0) {
+                                            <?php if ($cartItems > 0) {
                                                 foreach ($cartItems as $item) {    ?>
                                                     <tr>
                                                         <td>
@@ -113,9 +101,9 @@
                                                             <img src="<?php echo $imageURL; ?>" width="250" />
                                                         </td>
                                                         <td><?php echo $item["name"]; ?></td>
-                                                        <td><?php echo 'Rp' . $item["price"] . ''; ?></td>
+                                                        <td>Rp<?php echo number_format($item["price"], 0, ',', '.') ?></td>
                                                         <td><input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
-                                                        <td class="text-right"><?php echo 'Rp' . $item["subtotal"] . ''; ?></td>
+                                                        <td class="text-right">Rp<?php echo number_format($item["subtotal"], 0, ',', '.') ?></td>
                                                         <td class="text-right"><button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete item?')?window.location.href='<?php echo base_url('cart/removeItem/' . $item["rowid"]); ?>':false;"><i class="itrash"></i> </button> </td>
                                                     </tr>
                                                 <?php }
@@ -125,19 +113,27 @@
                                                         <p>Your cart is empty.....</p>
                                                     </td>
                                                 <?php } ?>
-                                                <?php if ($this->cart->total_items() > 0) { ?>
+                                                <?php if ($cartItems > 0) { ?>
+                                                    <?php
+
+                                                    $total = 0;
+                                                    foreach ($cartItems as $item) {
+                                                        $total += $item["price"] * $item["qty"];
+                                                    }
+
+                                                    ?>
                                                 <tr>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td><strong>Total Cart</strong></td>
-                                                    <td class="text-right"><strong><?php echo 'Rp.' . $this->cart->total() . ''; ?></strong></td>
+                                                    <td class="text-right">Rp.<strong><?php echo number_format($total, 0, ',', '.') ?></strong></td>
                                                     <td></td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
-                                    <a href="checkout.html" class="btn btn-main pull-right">Checkout</a>
+                                    <a href="<?= base_url('pembeli/checkout') ?>" class="btn btn-main pull-right">Checkout</a>
                                 </form>
                             </div>
                         </div>

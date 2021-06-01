@@ -4,17 +4,67 @@ class BarangModel extends CI_Model
 {
     function __construct()
     {
-        $this->Table = 'tb_barang';
+        $this->load->database();
     }
-    private $_table = "tb_barang";
 
-    public $id_barang;
-    public $merk;
-    public $spesifikasi;
-    public $kondisi_barang;
-    public $harga;
-    public $description;
+    public function tambah_barang($data)
+    {
+        return $this->db->insert('tb_barang', $data);
+    }
 
+
+    public function get_databarang()
+    {
+
+        return $this->db->get('tb_barang')->result_array();
+    }
+
+    public function get_dataOrder()
+    {
+
+        return $this->db->get('tb_order')->result_array();
+    }
+
+    // //Fungsi delete barang terhadap barang yang ada pada database tb_barang
+    public function deleteBarang($id)
+    {
+        // return $this->db->delete($this->_table, array("id_barang" => $id));
+        $this->db->where('id_barang', $id);
+        $this->db->delete('tb_barang');
+    }
+
+    public function edit_barangbyID($id)
+    {
+        // $this->db->get_where($tb_barang);
+        // $merk = $this->input->post('id');
+        return $this->db->get_where('tb_barang', ['id_barang' => $id])->row_array();
+    }
+
+    public function setUpdateData($id) //$data
+    {
+
+        $data = [
+            "merk" => $this->input->post('merk', true),
+            "spesifikasi" => $this->input->post('spesifikasi', true),
+            "kondisi_barang" => $this->input->post('$kondisi_barang', true),
+            "harga" => $this->input->post('harga', true),
+            "stok" => $this->input->post('stok', true)
+        ];
+
+        $this->db->where('id_barang', $id);
+        $this->db->update('tb_barang', $data);
+    }
+
+    public function edit_data($where, $table)
+    {
+        return $this->db->get_where($table, $where);
+    }
+
+    public function update_data($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table, $data);
+    }
     //Fungsi untuk menampilkan semua barang yang ada pada tb_barang
     public function TampilkanSemuaBarang()
     {
@@ -58,16 +108,11 @@ class BarangModel extends CI_Model
         $this->description = $post["description"];
         return $this->db->update($this->_table, $this, array('product_id' => $post['id']));
     }
-    //Fungsi delete barang terhadap barang yang ada pada database tb_barang
-    public function deleteBarang($id)
-    {
-        return $this->db->delete($this->_table, array("id_barang" => $id));
-    }
     //Fungsi untuk mendapatkan data barang lalu menampilkan nya per row_array
     public function getRows($id = '')
     {
         $this->db->select('*');
-        $this->db->from($this->Table);
+        $this->db->from('tb_barang');
         if ($id) {
             $this->db->where('id_barang', $id);
             $query = $this->db->get();
@@ -80,5 +125,97 @@ class BarangModel extends CI_Model
 
         // Return fetched data
         return !empty($result) ? $result : false;
+    }
+
+    public function getViewCart($id_user)
+    {
+        $unfilteredCartItems = $this->cart->contents();
+        $filteredCartItems = [];
+
+        foreach ($unfilteredCartItems as $item) {
+            $item_user_id = explode("_", $item["id"])[1];
+            if (isset($item["id"])) {
+                if ($item_user_id == $id_user) {
+                    array_push($filteredCartItems, $item);
+                };
+            }
+        }
+
+        return $filteredCartItems;
+    }
+
+    public function get_metodePembayaran()
+    {
+        $query = $this->db->get('tb_metodepembayaran');
+        return $query->result();
+    }
+
+    public function get_kurir()
+    {
+        $query = $this->db->get('tb_kurir');
+        return $query->result();
+    }
+
+    public function insert_transaksi()
+    {
+        $post = $this->input->post();
+        $this->username_pembeli = $post["username"];
+        $this->password_pembeli = password_hash($post["password"], PASSWORD_DEFAULT);
+        $this->nama_pembeli = $post["name"];
+        $this->noHp_pembeli = $post["telepon"];
+        $this->email_pembeli = $post["email"];
+        $this->role_id = 1;
+        $this->db->insert('tb_pembeli', $this);
+    }
+    public function insert_alamat($data)
+    {
+        $this->db->insert('tb_alamatpembeli', $data);
+    }
+
+    public function insert_new_order($ids_barang, $qty_barang, $id_pembeli, $total_bayar)
+    {
+        // insert order
+        $order_status = ["Unconfirmed", "Confirmed"];
+        $order = array();
+        $order["id_pembeli"] = $id_pembeli;
+        $order["order_status"] = $order_status[0];
+        $order["total_bayar"] = $total_bayar;
+        $this->db->insert("tb_order", $order);
+        $id_order = $this->db->insert_id();
+        // inser order detail
+        for ($i = 0; $i < count($ids_barang); $i++) {
+            $this->db->insert("tb_order_detail", [
+                "id_barang" => $ids_barang[$i],
+                "id_order" => $id_order,
+                "qty" => $qty_barang[$i]
+            ]);
+        }
+    }
+
+    public function insert_new_transaction(
+        $id_metode_pembayaran,
+        $id_agent_kurir,
+        $id_pembeli,
+        $harga_total
+    ) {
+        $this->db->insert("tb_transaksi", [
+            "id_pembeli" => $id_pembeli,
+            "id_Agent_kurir" => $id_agent_kurir,
+            "id_metodepembayaran" => $id_metode_pembayaran,
+            "harga_total" => $harga_total
+        ]);
+    }
+    public function update_stock($ids_barang, $qty_barang)
+    {
+        for ($i = 0; $i < count($ids_barang); $i++) {
+            $hasil = $this->db->where("id_barang", $ids_barang[$i])
+                ->get("tb_barang")
+                ->result_array();
+            $stok = $hasil[0]['stok'];
+            $stok = (int)$stok - (int)$qty_barang[$i];
+            $this->db->set('stok', $stok);
+            $this->db->where('id_barang', $ids_barang[$i]);
+            $this->db->update('tb_barang');
+        }
     }
 }

@@ -8,14 +8,18 @@ class Pembeli extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('UserModel');
+        $this->load->model('BarangModel');
     }
     public function index()
     {
         $data['title'] = 'Homepage Pembeli - Nusantara Phone Store';
         $this->load->model('BarangModel');
+        $session = $this->session->userdata('username_pembeli');
+        if (!isset($session)) redirect('auth');
+        $user = $this->UserModel->get_profile_pembeli($session);
         $data['barang'] = $this->BarangModel->TampilkanSemuaBarang()->result();
         $this->load->view('template/header', $data);
-        $this->load->view('view_pembeli/homepage', $data);
+        $this->load->view('view_pembeli/homepage', ['data' => $user]);
         $this->load->view('template/footer');
     }
 
@@ -40,10 +44,7 @@ class Pembeli extends CI_Controller
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('role_id');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been Logout!</div>');
-        $data['title'] = 'Nusantara Phone Store';
-        $this->load->view('template/header', $data);
-        $this->load->view('landing_page/homepage');
-        $this->load->view('template/footer');
+        redirect('homepage');
     }
     public function cart()
     {
@@ -55,6 +56,91 @@ class Pembeli extends CI_Controller
         $data['order'] = $this->BarangModel->getviewcart($user);
         $this->load->view('template/header', $data);
         $this->load->view('view_pembeli/cart', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function editProfile($id_user)
+    {
+        $this->load->library('form_validation');
+        $this->load->model('UserModel');
+        $this->form_validation->set_rules('name', 'Name', 'required|trim');
+        $this->form_validation->set_rules('telephone', 'Telepon', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        $data = [
+            'nama_pembeli' => htmlspecialchars($this->input->post('name', true)),
+            'username_pembeli' => htmlspecialchars($this->input->post('username', true)),
+            'email_pembeli' => htmlspecialchars($this->input->post('email', true)),
+            'noHp_pembeli' => htmlspecialchars($this->input->post('telephone', true)),
+        ];
+        if ($this->form_validation->run() == false) {
+            $session = $this->session->userdata('username_pembeli');
+            $user = $this->UserModel->get_profile_pembeli($session);
+            $data['title'] = 'Edit Profile Pembeli - Nusantara Phone Store';
+            $this->load->view('template/header', $data);
+            $this->load->view('view_pembeli/editprofile_pembeli', ['data' => $user]);
+            $this->load->view('template/footer');
+        } else {
+            $this->UserModel->editUser_Pembeli($id_user, $data);
+            $result = $this->db->get_where('tb_pembeli', ['username_pembeli' => $data['username_pembeli']])->row_array();
+            $user = [
+                'nama_pembeli' => $result['nama_pembeli'],
+                'username_pembeli' => $result['username_pembeli'],
+                'noHp_pembeli' => $result['noHp_pembeli'],
+                'email_pembeli' => $result['email_pembeli'],
+            ];
+            $this->session->set_userdata($user);
+            redirect('pembeli/editProfile/' . $id_user, 'refresh');
+        }
+    }
+    public function checkout()
+    {
+        $data['title'] = 'Checkout Barang - Nusantara Phone Store';
+        $nama_pembeli = $this->session->userdata('nama_pembeli');
+        $user = $this->session->userdata('id_pembeli');
+        $this->load->model('UserModel');
+        $this->load->model('BarangModel');
+        $data['pembayaran'] = $this->BarangModel->get_metodePembayaran();
+        $data['kurir'] = $this->BarangModel->get_kurir();
+        $data['user'] = $user;
+        $data['nama'] = $nama_pembeli;
+        $data['cartItems'] = $this->BarangModel->getviewcart($user);
+        $this->load->view('template/header', $data);
+        $this->load->view('view_pembeli/checkout', $data);
+        $this->load->view('template/footer');
+    }
+    public function confirmation()
+    {
+        $id_pembeli = $this->session->userdata('id_pembeli');
+        $data['title'] = 'Confirmation - Nusantara Phone Store';
+
+        $data_alamat = array();
+        $post = $this->input->post();
+
+        $data_alamat["id_pembeli"] = $id_pembeli;
+        $data_alamat["jalan_alamat"] = $post["jalan_alamat"];
+        $data_alamat["kota_alamat"] = $post["kota_alamat"];
+        $data_alamat["kode_pos"] = $post["kode_pos"];
+        $data_alamat["provinsi_alamat"] = $post["provinsi_alamat"];
+        $harga_total = $post["total_harga"];
+        $this->BarangModel->insert_alamat($data_alamat);
+
+        $ids_barang = explode(",", $post["ids_barang"]);
+        $qty_barang = explode(",", $post["qty_barang"]);
+        $this->BarangModel->update_stock($ids_barang, $qty_barang);
+        $this->BarangModel->insert_new_order($ids_barang, $qty_barang, $id_pembeli, $harga_total);
+
+        $id_metode_pembayaran = $post["metode_pembayaran"];
+        $id_agent_kurir = $post["agent_kurir"];
+        $this->BarangModel->insert_new_transaction(
+            $id_metode_pembayaran,
+            $id_agent_kurir,
+            $id_pembeli,
+            $harga_total
+        );
+
+        $this->load->view('template/header', $data);
+        $this->load->view('view_pembeli/confirmation', $data);
         $this->load->view('template/footer');
     }
 }

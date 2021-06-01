@@ -22,7 +22,7 @@
                             <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
                         </li>
                         <li><a href="<?= base_url('pembeli/registration'); ?>" class="btn btn-dark btn-sm">Register</a></li>
-                        <li><a href="<?= base_url('authpembeli'); ?>" class="btn btn-dark btn-sm">Login</a></li>
+                        <li><a href="<?= base_url('homepage/authlogin'); ?>" class="btn btn-dark btn-sm">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 <!-- Navbar Links -->
                 <div id="navbar" class="navbar-collapse collapse text-center">
                     <ul class="nav navbar-nav">
-                        <li><a href="homepage-user.html">Home</a></li>
+                        <li><a href="<?= base_url('homepage'); ?>">Home</a></li>
                         <li class="dropdown dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="tf-ion-ios-arrow-down"></span></a>
                             <ul class="dropdown-menu">
