@@ -130,16 +130,18 @@ class Pegawai extends CI_Controller
         $this->load->model('UserModel');
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        $this->form_validation->set_rules('noHP_pegawai', 'noHP_pegawai', 'required|trim');
         $data = [
-            'nama_pemilik' => htmlspecialchars($this->input->post('name', true)),
-            'username_pemilik' => htmlspecialchars($this->input->post('username', true)),
+            'nama_pegawai' => htmlspecialchars($this->input->post('name', true)),
+            'username_pegawai' => htmlspecialchars($this->input->post('username', true)),
+            'noHP_pegawai' => htmlspecialchars($this->input->post('noHP_pegawai', true))
         ];
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Edit Profile Pegawai - Nusantara Phone Store';
             $session = $this->session->userdata('username_pegawai');
-            $user = $this->UserModel->get_profile_pemilik($session);
+            $user = $this->UserModel->get_profile_pegawai($session);
             $this->load->view('template/header', $data);
-            $this->load->view('view_pemilik/editprofile_pegawai', ['data' => $user]);
+            $this->load->view('view_pegawai/editprofile_pegawai', ['data' => $user]);
             $this->load->view('template/footer');
         } else {
             $this->UserModel->editUser_Pegawai($id_user, $data);

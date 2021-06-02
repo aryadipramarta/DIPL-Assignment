@@ -16,7 +16,8 @@ class AuthPegawai extends CI_Controller
         }
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
-        if ($this->form_validation->run() == false) {
+        $condition = $this->form_validation->run();
+        if ($condition == false) {
             $data['title'] = 'Login - Pegawai PSSTORE';
             $this->load->view('auth/loginpegawai', $data);
         } else {
