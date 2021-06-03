@@ -12,18 +12,14 @@
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <!-- Site Logo -->
                     <div class="logo text-center">
-                        <a href="#">
-                            <h3>NUSANTARA PHONE STORE</h3>
-                        </a>
+                        <img src="<?= base_url('assets/image/logopsnusantara.png') ?>" height="180px">
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <ul class="top-menu text-right list-inline">
-                        <li>
-                            <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
-                        </li>
-                        <li><a href="<?= base_url('pembeli/registration'); ?>" class="btn btn-dark btn-sm">Register</a></li>
-                        <li><a href="<?= base_url('auth'); ?>" class="btn btn-dark btn-sm">Login</a></li>
+                        <a href="<?= base_url('pembeli/registration'); ?>" class="btn btn-dark">Register</a>
+                        <a href="<?= base_url('homepage/authlogin'); ?>" class="btn btn-secondary">Login</a>
+
                     </ul>
                 </div>
             </div>
@@ -38,16 +34,7 @@
                 <div id="navbar" class="navbar-collapse collapse text-center">
                     <ul class="nav navbar-nav">
                         <li><a href="<?= base_url('homepage'); ?>">Home</a></li>
-                        <li class="dropdown dropdown-slide">
-                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="tf-ion-ios-arrow-down"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="products.html">iPhone</a></li>
-                                <li><a href="products.html">Samsung</a></li>
-                                <li><a href="products.html">OPPO</a></li>
-                                <li><a href="products.html">Xiaomi</a></li>
-                                <li><a href="products.html">VIVO</a></li>
-                            </ul>
-                        </li>
+
                         <li><a href="<?= base_url('homepage/contact'); ?>">Contact</a></li>
                         <li><a href="<?= base_url('homepage/aboutus'); ?>">About Us</a></li>
                     </ul>

@@ -13,16 +13,12 @@
                     <div class="col-md-4 col-xs-12 col-sm-4">
                         <!-- Site Logo -->
                         <div class="logo text-center">
-                            <a href="#">
-                                <h3>NUSANTARA PHONE STORE</h3>
-                            </a>
+                            <img src="<?= base_url('assets/image/logopsnusantara.png') ?>" height="180px">
                         </div>
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4">
                         <ul class="top-menu text-right list-inline">
-                            <li>
-                                <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
-                            </li>
+
                             <li class="dropdown dropdown-slide">
                                 <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">
                                     <img src="<?= base_url('assets/image/user.png') ?>" height="20px"><span class="tf-ion-ios-arrow-down">
@@ -86,7 +82,8 @@
                                                                 <td><?php echo $o['tanggal_beli'] ?></td>
                                                                 <td><?php echo $o['total_bayar'] ?></td>
                                                                 <?php if ($o['order_status'] == 'Unconfirmed') { ?>
-                                                                    <td><button type="button" class="btn btn-info">Confirm</button></td>
+                                                                    <td><a href="<?= base_url('pegawai/proses/' . $o['id_order']) ?>" class="btn btn-sm btn-success">Confirm</a>
+                                                                    </td>
                                                                 <?php } else { ?>
                                                                     <td></td>
                                                                 <?php

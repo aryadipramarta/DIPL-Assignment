@@ -13,18 +13,16 @@
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <!-- Site Logo -->
                     <div class="logo text-center">
-                        <a href="index.html">
-                            <h3>Nusantara Phone Store</h3>
+                        <a href="<?= base_url('pembeli') ?>">
+                            <img src="<?= base_url('assets/image/logopsnusantara.png') ?>" height="180px">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <ul class="top-menu text-right list-inline">
+
                         <li>
-                            <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
-                        </li>
-                        <li>
-                            <a href="#!"><img src="<?= base_url('assets/image/cart.png') ?>" height="20px"></a>
+                            <a href="<?= base_url('cart'); ?>"><img src="<?= base_url('assets/image/cart.png') ?>" height="20px"></a>
                         </li>
                         <li class="dropdown dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">
@@ -46,22 +44,16 @@
         <nav class="navbar navigation">
             <div class="container">
                 <!-- Navbar Links -->
-                <div id="navbar" class="navbar-collapse collapse text-center">
+                <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="<?= base_url('pembeli') ?>">Home</a></li>
-                        <li class="dropdown dropdown-slide">
-                            <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="tf-ion-ios-arrow-down"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="products.html">iPhone</a></li>
-                                <li><a href="products.html">Samsung</a></li>
-                                <li><a href="products.html">OPPO</a></li>
-                                <li><a href="products.html">Xiaomi</a></li>
-                                <li><a href="products.html">VIVO</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="about.html">About Us</a></li>
                     </ul>
+                    <div class="navbar-form navbar-right">
+                        <?php echo form_open('pembeli/caribarang') ?>
+                        <input type="text" name="keyword" class="form-control" placeholder="Search">
+                        <button type="submit" class="btn btn-success">Find</button>
+                        <?php echo form_close() ?>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -76,7 +68,7 @@
                 <div class="col-md-7">
                     <div class="single-product-details">
                         <h2><?php echo $spesifikasi->merk ?></h2>
-                        <p class="product-price">Rp. <?php echo $spesifikasi->harga ?></p>
+                        <p class="product-price">Rp. <?php echo number_format($spesifikasi->harga, 0, ',', '.') ?></p>
 
                         <p class="product-description mt-20">
                             <?php echo $spesifikasi->spesifikasi ?>

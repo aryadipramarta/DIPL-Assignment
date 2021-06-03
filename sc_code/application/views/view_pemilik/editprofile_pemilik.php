@@ -13,9 +13,7 @@
                     <div class="col-md-4 col-xs-12 col-sm-4">
                         <!-- Site Logo -->
                         <div class="logo text-center">
-                            <a href="#">
-                                <h3>NUSANTARA PHONE STORE</h3>
-                            </a>
+                            <img src="<?= base_url('assets/image/logopsnusantara.png') ?>" height="180px">
                         </div>
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4">

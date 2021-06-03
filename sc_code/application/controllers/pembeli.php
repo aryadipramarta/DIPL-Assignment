@@ -95,6 +95,8 @@ class Pembeli extends CI_Controller
     }
     public function checkout()
     {
+        $session = $this->session->userdata('username_pembeli');
+        $data['user'] = $this->UserModel->get_profile_pembeli($session);
         $data['title'] = 'Checkout Barang - Nusantara Phone Store';
         $nama_pembeli = $this->session->userdata('nama_pembeli');
         $user = $this->session->userdata('id_pembeli');
@@ -113,10 +115,10 @@ class Pembeli extends CI_Controller
     {
         $id_pembeli = $this->session->userdata('id_pembeli');
         $data['title'] = 'Confirmation - Nusantara Phone Store';
-
         $data_alamat = array();
         $post = $this->input->post();
-
+        $session = $this->session->userdata('username_pembeli');
+        $data['user'] = $this->UserModel->get_profile_pembeli($session);
         $data_alamat["id_pembeli"] = $id_pembeli;
         $data_alamat["jalan_alamat"] = $post["jalan_alamat"];
         $data_alamat["kota_alamat"] = $post["kota_alamat"];
@@ -138,9 +140,21 @@ class Pembeli extends CI_Controller
             $id_pembeli,
             $harga_total
         );
-
         $this->load->view('template/header', $data);
         $this->load->view('view_pembeli/confirmation', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function caribarang()
+    {
+        $data['title'] = 'Homepage Pembeli - Nusantara Phone Store';
+        $this->load->model('BarangModel');
+        $session = $this->session->userdata('username_pembeli');
+        $user = $this->UserModel->get_profile_pembeli($session);
+        $keyword = $this->input->post('keyword');
+        $data['caribrg'] = $this->BarangModel->get_keyword($keyword);
+        $this->load->view('template/header', $data);
+        $this->load->view('view_pembeli/searchbarang', ['data' => $user]);
         $this->load->view('template/footer');
     }
 }

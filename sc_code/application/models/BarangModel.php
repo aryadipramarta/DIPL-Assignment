@@ -218,4 +218,17 @@ class BarangModel extends CI_Model
             $this->db->update('tb_barang');
         }
     }
+    public function update_orderstatus($data)
+    {
+        $this->db->where('id_order', $data['id_order']);
+        $this->db->update('tb_order', $data);
+    }
+    public function get_keyword($keyword)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_barang');
+        $this->db->like('merk', $keyword);
+        $this->db->or_like('spesifikasi', $keyword);
+        return $this->db->get()->result();
+    }
 }

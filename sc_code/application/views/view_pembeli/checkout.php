@@ -13,15 +13,15 @@
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <!-- Site Logo -->
                     <div class="logo text-center">
-                        <a href="#">
-                            <h3>NUSANTARA PHONE STORE</h3>
-                        </a>
+                        <img src="<?= base_url('assets/image/logopsnusantara.png') ?>" height="180px">
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <ul class="top-menu text-right list-inline">
                         <li>
-                            <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
+                            <form action="<?= base_url(''); ?>" method="POST"><input type="text" class="form-control" placeholder="Search...">
+                                <input class="btn btn-primary" type="submit" value="Submit">
+                            </form>
                         </li>
                         <li>
                             <a href="<?= base_url('cart') ?>"><img src="<?= base_url('assets/image/cart.png') ?>" height="20px"></a>
@@ -48,7 +48,7 @@
                 <!-- Navbar Links -->
                 <div id="navbar" class="navbar-collapse collapse text-center">
                     <ul class="nav navbar-nav">
-                        <li><a href="homepage-user.html">Home</a></li>
+                        <li><a href="<?= base_url('pembeli'); ?>">Home</a></li>
                         <li class="dropdown dropdown-slide">
                             <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="tf-ion-ios-arrow-down"></span></a>
                             <ul class="dropdown-menu">
@@ -72,7 +72,7 @@
                     <div class="content">
                         <h1 class="page-name">Checkout</h1>
                         <ol class="breadcrumb">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="<?= base_url('pembeli'); ?>">Home</a></li>
                             <li class="active">checkout</li>
                         </ol>
                     </div>
@@ -90,7 +90,6 @@
                             <form class="checkout-form" method="POST" action="">
                                 <div class="form-group">
                                     <label for="full_name">Full Name</label>
-
                                     <input type="text" class="form-control" id="full_name" placeholder="<?= $nama ?>" readonly="readonly">
                                 </div>
                                 <div class="form-group">
@@ -115,22 +114,23 @@
                         </div>
                         <div class="block">
                             <h4 class="widget-title">Payment Method</h4>
-                            <p>Credit Cart Details (Secure payment)</p>
+                            <p>Make Sure You Write the Correct Account Number</p>
                             <div class="checkout-product-details">
                                 <div class="payment">
                                     <div class="card-details">
                                         <form class="checkout-form" method="post" action="<?= base_url('pembeli/confirmation') ?>">
-                                            <label for="card-number">Pilih Bank <span class="required">*</span></label>
+                                            <label for="card-number">Choose Bank Account <span class="required">*</span></label>
 
                                             <select class="form-select form-select-lg mb-3" aria-label="Default select example" id="metode-pembayaran">
                                                 <?php foreach ($pembayaran as $byr) {
+                                                    $id_rekening = $byr->id_metodepembayaran;
                                                     $nama_rekening = $byr->nama_rekening;
                                                     $nomer_rekening = $byr->nomer_rekening;
                                                     $atas_nama = $byr->atas_nama; ?>
-                                                    <option value="<?= $byr->id_metodepembayaran ?>"><?php echo ($nama_rekening); ?></option>
+                                                    <option data-metode="<?= $nomer_rekening ?>" value="<?= $id_rekening ?>"><?php echo ($nama_rekening); ?></option>
                                                 <?php } ?>
                                             </select>
-                                            <label for="card-number">Pilih Kurir <span class="required">*</span></label>
+                                            <label for="card-number">Choose Agent <span class="required">*</span></label>
                                             <select class="form-select form-select-lg mb-3" aria-label="Default select example" id="agent-kurir">
                                                 <?php foreach ($kurir as $kr) {
                                                     $Agent_Kurir = $kr->id_Agent_Kurir;
@@ -139,6 +139,8 @@
                                                     <option data-ongkir="<?= $Ongkos_kirim ?>" value="<?= $Agent_Kurir ?>"><?php echo ($Nama_Agent); ?></option>
                                                 <?php } ?>
                                             </select>
+                                            <p>*Remember To Transfer To This Account Number*</p>
+                                            <p>Account Number : <span id="no-rek" data-rekening="0"></span></p>
                                             <button class="btn btn-main mt-20" id="submitBtn">Place Order</button>
                                         </form>
                                     </div>
@@ -216,12 +218,21 @@
             return total
         }
 
+        function shownorek() {
+            const id_metodepembayaran = rekeningpembayaran.value
+            const optionNorek = document.querySelector(`#metode-pembayaran > option[value="${id_metodepembayaran}"]`)
+            return optionNorek.dataset.metode
+        }
+        const rekeningpembayaran = document.getElementById("metode-pembayaran")
         const submitBtn = document.getElementById("submitBtn")
         const kurirSelect = document.getElementById("agent-kurir")
         const shippingElement = document.getElementById("shipping-fee")
+        const norekening = document.getElementById("no-rek")
         const totalText = document.getElementById("total-harga-text")
         let ongkir = 0
-
+        let norek = 0
+        norek = shownorek()
+        norekening.textContent = norek
         ongkir = countOngkir()
         shippingElement.textContent = "Rp. " + numberWithCommas(ongkir)
         total = countTotal(ongkir)
@@ -232,6 +243,11 @@
             shippingElement.textContent = "Rp. " + numberWithCommas(ongkir)
             total = countTotal(ongkir)
             totalText.textContent = "Rp. " + numberWithCommas(total)
+        })
+
+        rekeningpembayaran.addEventListener("change", () => {
+            norek = shownorek()
+            norekening.textContent = norek
         })
 
         submitBtn.addEventListener("click", (e) => {

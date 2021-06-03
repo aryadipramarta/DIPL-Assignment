@@ -31,16 +31,12 @@
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <!-- Site Logo -->
                     <div class="logo text-center">
-                        <a href="index.html">
-                            <h3>Nusantara Phone Store</h3>
-                        </a>
+                        <img src="<?= base_url('assets/image/logopsnusantara.png') ?>" height="180px">
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12 col-sm-4">
                     <ul class="top-menu text-right list-inline">
-                        <li>
-                            <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
-                        </li>
+
                         <li>
                             <a href="<?= base_url('cart') ?>"><img src="<?= base_url('assets/image/cart.png') ?>" height="20px"></a>
                         </li>

@@ -45,7 +45,8 @@ class Pegawai extends CI_Controller
 
     public function updateData($id)
     {
-
+        $session = $this->session->userdata('username_pegawai');
+        $data['user'] = $this->UserModel->get_profile_pegawai($session);
         $data['tb_barang'] = $this->BarangModel->edit_barangbyID($id);
         $this->form_validation->set_rules('merk', 'merk', 'required');
         $this->form_validation->set_rules('spesifikasi', 'spesifikasi', 'required');
@@ -153,5 +154,15 @@ class Pegawai extends CI_Controller
             $this->session->set_userdata($user);
             redirect('pegawai/editProfile/' . $id_user, 'refresh');
         }
+    }
+    public function proses($id_order)
+    {
+        $data = array(
+            'id_order' => $id_order,
+            'order_status' => 'Confirmed'
+        );
+        $this->BarangModel->update_orderstatus($data);
+        $this->session->set_flashdata('pesan', 'Pesanan Berhasil di Konfirmasi');
+        redirect('pegawai', 'refresh');
     }
 }
