@@ -16,27 +16,16 @@ class Pemilik extends CI_Controller
         $session = $this->session->userdata('username_pemilik');
         if (!isset($session)) redirect('auth');
         $user = $this->UserModel->get_profile_pemilik($session);
-        $data['barang'] = $this->BarangModel->TampilkanSemuaBarang()->result();
+        $data['laporan'] = $this->BarangModel->get_laporan();
+        $data['total_jual'] = $this->BarangModel->get_total_penjualan();
+        $data['total_user'] = $this->UserModel->total_user();
+        $data['total_transaksi'] = $this->BarangModel->get_banyak_transaksi();
+        $data['total_unconfirmed'] = $this->BarangModel->count_unconfirmed();
         $this->load->view('template/header', $data);
         $this->load->view('view_pemilik/dashboard_pemilik', ['data' => $user]);
         $this->load->view('template/footer');
     }
-    public function view_laporan()
-    {
-        $this->form_validation->set_rules('kodelaporan', 'KodeLaporan', 'required|trim');
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Lihat Laporan';
-            $this->load->view('pemilik/laporan', $data);
-        } else {
-            $data['kode_laporan'] = $this->input->post('kodelaporan');
-            $result = $this->UserModel->login($data);
-            if (!$result) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Laporan Tidak Ditemukan !</div>');
-                $data['title'] = 'Lihat Laporan';
-                $this->load->view('pemilik/laporan', $data);
-            }
-        }
-    }
+
     public function logout()
     {
         $this->session->unset_userdata('username');

@@ -53,6 +53,7 @@
           <div class="col-md-12">
             <ul class="list-inline dashboard-menu text-center">
               <li><a href="dashboard-pegawai.html">Orders</a></li>
+              <li><a href="<?= base_url('pegawai/order_detail'); ?>">Order Detail</a></li>
               <li><a href="input-item.html">Input Item</a></li>
               <li><a class="active">List Item</a></li>
             </ul>
@@ -75,16 +76,11 @@
                             <label for="exampleInputEmail1" class="form-label">Type</label>
                             <br>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="radio1" id="inlineRadio1" value="<?php echo $tb_barang['kondisi_barang'] ?>">
+                              <input class="form-check-input" type="radio" name="kondisi_barang" id="inlineRadio1" value="New">
                               <label class="form-check-label" for="inlineRadio1">New</label>
                             </div>
-                            <!-- <div class="form-group">
-                                            <label for="radio1">Type</label>
-                                            <label><input type="radio" name="radio1" value="New"<?php echo ($tb_barang->kondisi_barang == 'Baru' ? 'checked' : ''); ?>> New</label>
-                                            <label><input type="radio" name="radio1" value="Second"<?php echo ($tb_barang->kondisi_barang == 'Lama' ? 'checked' : ''); ?>> Second</label>
-                                        </div> -->
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="radio1" id="inlineRadio2" value="<?php echo $tb_barang['kondisi_barang'] ?>">
+                              <input class="form-check-input" type="radio" name="kondisi_barang" id="inlineRadio2" value="Second">
                               <label class="form-check-label" for="inlineRadio2">Second</label>
                             </div>
                           </div>

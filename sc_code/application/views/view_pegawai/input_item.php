@@ -52,6 +52,7 @@
           <div class="col-md-12">
             <ul class="list-inline dashboard-menu text-center">
               <li><a href="<?= base_url('pegawai'); ?>">Orders</a></li>
+              <li><a href="<?= base_url('pegawai/order_detail'); ?>">Order Detail</a></li>
               <li><a class="active">Input Item</a></li>
               <li><a href="<?= base_url('pegawai/list_item'); ?>">List Item</a></li>
             </ul>
@@ -61,36 +62,41 @@
                   <div class="col-md-12">
                     <div class="dashboard-wrapper dashboard-user-profile">
                       <div class="media">
-                        <form method="POST" action=<?= base_url('pegawai/add'); ?>>
-                          <div class=" mt-3 mb-5">
-                            <label for="exampleInputEmail1" class="form-label">Product</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" name="merk">
+                        <?php echo form_open_multipart('pegawai/add'); ?>
+                        <div class=" mt-3 mb-5">
+                          <label for="exampleInputEmail1" class="form-label">Product</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" name="merk">
+                        </div>
+                        <div class="mb-5">
+                          <label for="exampleFormControlTextarea1" class="form-label">Specifications</label>
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="spesifikasi"></textarea>
+                        </div>
+                        <div class="mb-5">
+                          <label for="exampleInputEmail1" class="form-label">Type</label>
+                          <br>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="kondisi_barang" id="inlineRadio1" value="New">
+                            <label class="form-check-label" for="inlineRadio1">New</label>
                           </div>
-                          <div class="mb-5">
-                            <label for="exampleFormControlTextarea1" class="form-label">Specifications</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="spesifikasi"></textarea>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="kondisi_barang" id="inlineRadio2" value="Second">
+                            <label class="form-check-label" for="inlineRadio2">Second</label>
                           </div>
-                          <div class="mb-5">
-                            <label for="exampleInputEmail1" class="form-label">Type</label>
-                            <br>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="radio1" id="inlineRadio1" value="option1">
-                              <label class="form-check-label" for="inlineRadio1">New</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="radio1" id="inlineRadio2" value="option2">
-                              <label class="form-check-label" for="inlineRadio2">Second</label>
-                            </div>
-                          </div>
-                          <div class="mb-5">
-                            <label for="exampleInputEmail1" class="form-label">Price</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" name="harga">
-                          </div>
-                          <div class="mb-5">
-                            <label for="exampleInputEmail1" class="form-label">Stock</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" name="stok">
-                          </div>
-                          <button type="submit" class="btn btn-primary pull-right align-bottom">Input Item</button>
+                        </div>
+                        <div class="mb-5">
+                          <label for="exampleInputEmail1" class="form-label">Price</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" name="harga">
+                        </div>
+                        <div class="mb-5">
+                          <label for="exampleInputEmail1" class="form-label">Stock</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" name="stok">
+                        </div>
+                        <div class="mb-5">
+                          <label class="form-label">Upload Foto</label>
+                          <input type="file" class="form-control" id="foto" name="foto">
+                        </div>
+                        <button type="submit" class="btn btn-primary pull-right align-bottom">Input Item</button>
+                        <?php echo form_close(); ?>
                       </div>
                     </div>
                   </div>

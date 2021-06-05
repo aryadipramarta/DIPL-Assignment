@@ -52,8 +52,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="list-inline dashboard-menu text-center">
-                            <li><a class="active">Orders</a></li>
-                            <li><a href="<?= base_url('pegawai/order_detail'); ?>">Order Detail</a></li>
+                            <li><a href="<?= base_url('pegawai'); ?>">Orders</a></li>
+                            <li><a class="active" href="<?= base_url('pegawai/order_detail'); ?>">Order Detail</a></li>
                             <li><a href="<?= base_url('pegawai/input_item'); ?>">input Item</a></li>
                             <li><a href="<?= base_url('pegawai/list_item'); ?>">List Item</a></li>
                         </ul>
@@ -66,35 +66,25 @@
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-
-                                                            <th>ID_Order</th>
+                                                            <th>Id Order</th>
                                                             <th>Nama Pembeli</th>
-                                                            <th>Tanggal Checkout</th>
-                                                            <th>Total Bayar</th>
-                                                            <th>Detail Barang</th>
-                                                            <th>Order Status</th>
-                                                            <th></th>
+                                                            <th>Nama Barang</th>
+                                                            <th>Quantity</th>
+                                                            <th>Tanggal Beli</th>
+                                                            <th>Status</th>
                                                         </tr>
                                                         <?php
-
-                                                        foreach ($order_barang as $o) {
-                                                            $id_order = $o->id_order;
+                                                        $no = 1;
+                                                        foreach ($order_detail as $o) {
+                                                            #$id_order = $o->id_order;
                                                         ?>
                                                             <tr>
-
                                                                 <td><?php echo $o->id_order ?></td>
                                                                 <td><?php echo $o->nama_pembeli ?></td>
+                                                                <td><?php echo $o->merk ?></td>
+                                                                <td><?php echo $o->qty ?></td>
                                                                 <td><?php echo $o->tanggal_beli ?></td>
-                                                                <td>Rp.<?php echo number_format($o->total_bayar, 0, ',', '.') ?></td>
-                                                                <td><?php echo 0 ?></td>
                                                                 <td><?php echo $o->order_status ?></td>
-                                                                <?php if ($o->order_status == 'Unconfirmed') { ?>
-                                                                    <td><a href="<?= base_url('pegawai/proses/' . $id_order) ?>" class="btn btn-sm btn-success">Confirm</a>
-                                                                    </td>
-                                                                <?php } else { ?>
-                                                                    <td></td>
-                                                                <?php
-                                                                } ?>
                                                             </tr>
                                                         <?php } ?>
                                                     </thead>

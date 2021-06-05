@@ -18,11 +18,7 @@
                     </div>
                     <div class="col-md-4 col-xs-12 col-sm-4">
                         <ul class="top-menu text-right list-inline">
-                            <li>
-                                <form action="<?= base_url(''); ?>" method="POST"><input type="text" class="form-control" placeholder="Search...">
-                                    <input class="btn btn-primary" type="submit" value="Submit">
-                                </form>
-                            </li>
+
                             <li>
                                 <a href="<?= base_url('cart') ?>"><img src="<?= base_url('assets/image/cart.png') ?>" height="20px"></a>
                             </li>
@@ -32,7 +28,7 @@
                                     </span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?= base_url('pembeli/editProfile/' . $d['id_pembeli']); ?>">My Profile</a></li>
-                                    <li><a href="<?= base_url('pembeli/order'); ?>">My Order</a></li>
+                                    <li><a href="<?= base_url('pembeli/view_myorder/' . $d['id_pembeli']); ?>">My Order</a></li>
                                     <li><a href="<?= base_url('pembeli/logout') ?>">Logout</a></li>
                                 </ul>
                             </li>
@@ -43,29 +39,6 @@
         </section>
 
         <!-- Main Menu Section -->
-        <section class="menu">
-            <nav class="navbar navigation">
-                <div class="container">
-                    <!-- Navbar Links -->
-                    <div id="navbar" class="navbar-collapse collapse text-center">
-                        <ul class="nav navbar-nav">
-                            <li><a href="<?= base_url('pembeli'); ?>">Home</a></li>
-                            <li class="dropdown dropdown-slide">
-                                <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="tf-ion-ios-arrow-down"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="products.html">iPhone</a></li>
-                                    <li><a href="products.html">Samsung</a></li>
-                                    <li><a href="products.html">OPPO</a></li>
-                                    <li><a href="products.html">Xiaomi</a></li>
-                                    <li><a href="products.html">VIVO</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </section>
-
         <section class="page-wrapper success-msg">
             <div class="container">
                 <div class="row">

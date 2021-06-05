@@ -157,4 +157,16 @@ class Pembeli extends CI_Controller
         $this->load->view('view_pembeli/searchbarang', ['data' => $user]);
         $this->load->view('template/footer');
     }
+    public function view_myorder()
+    {
+        $data['title'] = 'My Order - Nusantara Phone Store';
+        $this->load->model('BarangModel');
+        $session = $this->session->userdata('username_pembeli');
+        $id_pembeli = $this->session->userdata('id_pembeli');
+        $user = $this->UserModel->get_profile_pembeli($session);
+        $data['myorder'] = $this->UserModel->view_myorder($id_pembeli);
+        $this->load->view('template/header', $data);
+        $this->load->view('view_pembeli/myorder', ['data' => $user]);
+        $this->load->view('template/footer');
+    }
 }

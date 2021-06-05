@@ -9,13 +9,16 @@ class Pegawai extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('UserModel');
         $this->load->model('BarangModel');
+        $this->load->library('upload');
+        $this->load->helper(array('form', 'url'));
     }
     public function index()
     {
         $data['title'] = 'Pegawai - Nusantara Phone Store';
         $session = $this->session->userdata('username_pegawai');
         $data['user'] = $this->UserModel->get_profile_pegawai($session);
-        $data['order_barang'] = $this->BarangModel->get_dataOrder();
+        $data['order_barang'] = $this->BarangModel->get_data_orderan();
+
         $this->load->view('template/header', $data);
         $this->load->view('view_pegawai/dashboard_pegawai', $data);
         $this->load->view('template/footer');
@@ -76,14 +79,40 @@ class Pegawai extends CI_Controller
 
     public function add()
     {
+        // $config['upload_path']          = './assets/images';
+        // $config['allowed_types']        = 'gif|jpg|png|PNG';
+        // $config['max_size']             = 10000;
+        // $config['max_width']            = 10000;
+        // $config['max_height']           = 10000;
+        // $this->upload->initialize($config);
+        $merk = $this->input->post('merk');
+        $spesifikasi = $this->input->post('spesifikasi');
+        $kondisi_barang = $this->input->post('kondisi_barang');
+        $harga = $this->input->post('harga');
+        $stok = $this->input->post('stok');
+        $foto = $_FILES['foto'];
+        if ($foto = '') {
+        } else {
+            $config['upload_path']          = './assets/image';
+            $config['allowed_types']        = 'gif|jpg|png|PNG';
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('foto')) {
+                var_dump($this->upload->display_errors());
+                echo "Upload Gagal";
+                die();
+            } else {
+                $foto = $this->upload->data('file_name');
+            }
+        }
         $data = [
-            'merk' => $this->input->post('merk'),
-            'spesifikasi' => $this->input->post('spesifikasi'),
-            'kondisi_barang' => $this->input->post('radio1'),
-            'harga' => $this->input->post('harga'),
-            'stok' => $this->input->post('stok'),
+            'merk' => $merk,
+            'spesifikasi' => $spesifikasi,
+            'kondisi_barang' => $kondisi_barang,
+            'harga' => $harga,
+            'stok' => $stok,
+            'img_barang' => $foto
         ];
-
         $this->BarangModel->tambah_barang($data);
         redirect('pegawai/list_item');
     }
@@ -102,10 +131,9 @@ class Pegawai extends CI_Controller
     {
         $merk = $this->input->post('merk');
         $spesifikasi = $this->input->post('spesifikasi');
-        $kondisi_barang = $this->input->post('radio1');
+        $kondisi_barang = $this->input->post('kondisi_barang');
         $harga = $this->input->post('harga');
         $stok = $this->input->post('stok');
-
         $data = array(
             'merk' => $merk,
             'spesifikasi' => $spesifikasi,
@@ -164,5 +192,15 @@ class Pegawai extends CI_Controller
         $this->BarangModel->update_orderstatus($data);
         $this->session->set_flashdata('pesan', 'Pesanan Berhasil di Konfirmasi');
         redirect('pegawai', 'refresh');
+    }
+    public function order_detail()
+    {
+        $data['title'] = 'Order Detail - Nusantara Phone Store';
+        $session = $this->session->userdata('username_pegawai');
+        $data['user'] = $this->UserModel->get_profile_pegawai($session);
+        $data['order_detail'] = $this->BarangModel->get_data_orderdetail();
+        $this->load->view('template/header', $data);
+        $this->load->view('view_pegawai/order_detail', $data);
+        $this->load->view('template/footer');
     }
 }

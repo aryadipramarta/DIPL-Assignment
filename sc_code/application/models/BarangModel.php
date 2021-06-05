@@ -231,4 +231,48 @@ class BarangModel extends CI_Model
         $this->db->or_like('spesifikasi', $keyword);
         return $this->db->get()->result();
     }
+    public function get_laporan()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_transaksi');
+        $this->db->join('tb_pembeli', 'tb_pembeli.id_pembeli = tb_transaksi.id_pembeli', 'left');
+        $this->db->join('tb_kurir', 'tb_kurir.id_Agent_Kurir = tb_transaksi.id_Agent_Kurir', 'left');
+        $this->db->join('tb_metodepembayaran', 'tb_metodepembayaran.id_metodepembayaran = tb_transaksi.id_metodepembayaran', 'left');
+        return $this->db->get()->result();
+    }
+    public function get_data_orderan()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_order');
+        $this->db->join('tb_pembeli', 'tb_pembeli.id_pembeli = tb_order.id_pembeli');
+        return $this->db->get()->result();
+    }
+    public function get_data_orderdetail()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_order_detail');
+        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_order_detail.id_barang');
+        $this->db->join('tb_order', 'tb_order.id_order = tb_order_detail.id_order');
+        $this->db->join('tb_pembeli', 'tb_pembeli.id_pembeli = tb_order.id_pembeli');
+        $this->db->order_by('tb_order_detail.id_order', 'ASC');
+        return $this->db->get()->result();
+    }
+    public function get_total_penjualan()
+    {
+        $sql = "SELECT sum(harga_total) as harga FROM tb_transaksi";
+        $result = $this->db->query($sql);
+        return $result->row()->harga;
+    }
+    public function get_banyak_transaksi()
+    {
+        $sql = "SELECT count(id_transaksi) as transaksi FROM tb_transaksi";
+        $result = $this->db->query($sql);
+        return $result->row()->transaksi;
+    }
+    public function count_unconfirmed()
+    {
+        $sql = "SELECT count(if(order_status='Unconfirmed',order_status,NULL)) as order_status FROM tb_order";
+        $result = $this->db->query($sql);
+        return $result->row()->order_status;
+    }
 }

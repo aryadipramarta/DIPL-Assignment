@@ -116,4 +116,20 @@ class UserModel extends CI_Model
         $result = $this->db->update('tb_pemilik', $data);
         return $result;
     }
+    public function total_user()
+    {
+        $sql = "SELECT count(id_pembeli) as pembeli FROM tb_pembeli";
+        $result = $this->db->query($sql);
+        return $result->row()->pembeli;
+    }
+    public function view_myorder($id_pembeli)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_order_detail');
+        $this->db->join('tb_barang', 'tb_barang.id_barang = tb_order_detail.id_barang');
+        $this->db->join('tb_order', 'tb_order.id_order = tb_order_detail.id_order');
+        $this->db->join('tb_pembeli', 'tb_pembeli.id_pembeli = tb_order.id_pembeli');
+        $this->db->where('tb_order.id_pembeli', $id_pembeli);
+        return $this->db->get()->result();
+    }
 }

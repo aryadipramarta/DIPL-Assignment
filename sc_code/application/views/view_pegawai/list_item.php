@@ -53,6 +53,7 @@
                     <div class="col-md-12">
                         <ul class="list-inline dashboard-menu text-center">
                             <li><a href="<?= base_url('pegawai'); ?>">Orders</a></li>
+                            <li><a href="<?= base_url('pegawai/order_detail'); ?>">Order Detail</a></li>
                             <li><a href="<?= base_url('pegawai/input_item'); ?>">Input Item</a></li>
                             <li><a class="active">List Item</a></li>
                         </ul>
@@ -67,6 +68,7 @@
                                                         <tr style="font-weight:bold;">
                                                             <td class="text-center" scope="col">ID</td>
                                                             <td class="text-center" scope="col">Product</td>
+                                                            <td class="text-center" scope="col">Image</td>
                                                             <td class="text-center" scope="col">Specifications</td>
                                                             <td class="text-center" scope="col">Type</td>
                                                             <td class="text-center" scope="col">Price </td>
@@ -82,6 +84,8 @@
                                                             <tr>
                                                                 <td><?php echo $id_barang++ ?></td>
                                                                 <td><?php echo $b['merk'] ?></td>
+                                                                <?php $imageURL = !empty($b["img_barang"]) ? base_url('assets/image/' . $b["img_barang"]) : base_url('assets/images/pro-demo-img.jpeg'); ?>
+                                                                <td><img src="<?php echo $imageURL; ?>" height=100px></td>
                                                                 <td><?php echo $b['spesifikasi'] ?></td>
                                                                 <td><?php echo $b['kondisi_barang'] ?></td>
                                                                 <td><?php echo $b['harga'] ?></td>
