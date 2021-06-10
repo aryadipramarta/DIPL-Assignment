@@ -8,9 +8,13 @@ class Barang extends CI_Controller
         parent::__construct();
         $this->load->library('cart');
         $this->load->model('BarangModel');
+        $this->load->model('UserModel');
     }
     public function spesifikasi($id)
     {
+        $session = $this->session->userdata('username_pembeli');
+        $user = $this->UserModel->get_profile_pembeli($session);
+        $data['user'] = $user;
         $this->load->model('BarangModel');
         $product = array();
         $product['products'] = $this->BarangModel->getRows();

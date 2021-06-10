@@ -83,9 +83,9 @@
                                 <img class="img-responsive" src="<?php echo base_url() . 'assets/image/' . $brg->img_barang ?>" alt="product-img" />
                             </div>
                             <div class="product-content">
-                                <h4><a href=""><?php echo $brg->merk ?></a></h4>
-                                <p>Rp. <?php echo $brg->harga ?></p>
-                                <?php echo anchor('barang/spesifikasi/' . $brg->id_barang, '<span class="badge badge-success">View Spesifikasi Barang</span>') ?>
+                                <h4><?php echo $brg->merk ?></a></h4>
+                                <p>Rp.<?php echo number_format($brg->harga, 0, ',', '.') ?></p>
+                                <?php echo anchor('authpembeli', '<span class="badge badge-success">View Spesifikasi Barang</span>') ?>
                             </div>
                         </div>
                     </div>

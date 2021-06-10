@@ -77,7 +77,7 @@
                         <div class="product-item">
                             <div class="product-thumb">
                                 <span class="bage">Sale</span>
-                                <img class="img-responsive" src="<?php echo base_url() . 'assets/image/' . $brg->img_barang ?>" alt="product-img" />
+                                <img class="img-responsive" src="<?php echo base_url() . 'assets/image/' . $brg->img_barang ?>" alt="product-img" height="180px" />
                             </div>
                             <div class="product-content">
                                 <h4><a href="<?= base_url('barang/spesifikasi/' . $brg->id_barang); ?>"><?php echo $brg->merk ?></a></h4>

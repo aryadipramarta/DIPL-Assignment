@@ -28,7 +28,7 @@
                                     </span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?= base_url('pembeli/editProfile/' . $d['id_pembeli']); ?>">My Profile</a></li>
-                                    <li><a href="<?= base_url('pembeli/order'); ?>">My Order</a></li>
+                                    <li><a href="<?= base_url('pembeli/view_myorder/' . $d['id_pembeli']); ?>">My Order</a></li>
                                     <li><a href="<?= base_url('pembeli/logout') ?>">Logout</a></li>
                                 </ul>
                             </li>

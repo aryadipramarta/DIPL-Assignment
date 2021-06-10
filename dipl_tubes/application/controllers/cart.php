@@ -8,6 +8,7 @@ class Cart extends CI_Controller
         parent::__construct();
         $this->load->library('cart');
         $this->load->model('BarangModel');
+        $this->load->model('UserModel');
     }
     function index()
     {
@@ -16,6 +17,9 @@ class Cart extends CI_Controller
         $filteredCartItems = $this->BarangModel->getViewCart($id_user);
         $data['title'] = 'Cart - Nusantara Phone Store';
         $data['cartItems'] = $filteredCartItems;
+        $session = $this->session->userdata('username_pembeli');
+        $user = $this->UserModel->get_profile_pembeli($session);
+        $data['user'] = $user;
         $this->load->view('template/header', $data);
         $this->load->view('view_pembeli/cart', $data);
         $this->load->view('template/footer');
