@@ -275,4 +275,11 @@ class BarangModel extends CI_Model
         $result = $this->db->query($sql);
         return $result->row()->order_status;
     }
+    function search_brg($key)
+    {
+        $this->db->like('merk', $key, 'BOTH');
+        $this->db->order_by('id_barang', 'asc');
+        $this->db->limit(10);
+        return $this->db->get('tb_barang')->result();
+    }
 }

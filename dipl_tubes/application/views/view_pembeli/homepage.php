@@ -59,7 +59,7 @@
                         </ul>
                         <div class="navbar-form navbar-right">
                             <?php echo form_open('pembeli/caribarang') ?>
-                            <input type="text" name="keyword" class="form-control" placeholder="Search">
+                            <input type="text" name="keyword" class="form-control" placeholder="Search" id="keyword">
                             <button type="submit" class="btn btn-success">Find</button>
                             <?php echo form_close() ?>
                         </div>
@@ -90,3 +90,8 @@
                 <?php endforeach; ?>
             </div>
     </section>
+    <script>
+        $("#keyword").autocomplete({
+            source: "<?php echo site_url('barang/get_autocomplete') ?>"
+        });
+    </script>

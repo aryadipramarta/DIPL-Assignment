@@ -40,4 +40,15 @@ class Barang extends CI_Controller
         $this->cart->insert($data);
         redirect('cart/');
     }
+    function get_autocomplete()
+    {
+        if (isset($_GET['term'])) {
+            $result = $this->BarangModel->search_brg($_GET['term']);
+            if (count($result) > 0) {
+                foreach ($result as $row)
+                    $arr_result[] = $row->merk;
+                echo json_encode($arr_result);
+            }
+        }
+    }
 }
